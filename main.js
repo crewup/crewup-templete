@@ -12,25 +12,18 @@ $(window).scroll(function(){
   }
 });
 
-var toggle = 0;
+/**/
+var cardLikeToggle = 0;
 $(document).ready(function(){
   $('#love').click(function(){
-    if (toggle===0){
+    if (cardLikeToggle===0){
       $(this).css('color', 'red');
-      toggle = 1;
+      cardLikeToggle = 1;
     }
     else{
-    /*$(this).css('color', 'white');
-      toggle = 0; *//*just change for this project*/
-      $("#another-hint").css('display','inline');
-      $("#another-hint").fadeOut(4000);
+      $(this).css('color', 'white');
+      cardLikeToggle = 0;
     }
-  });
-
-  $("#hint").click(function(){
-    $("#hint-text").css('display','inline');
-    $("#hint-text").fadeOut(2000);
-
   });
 });
 
