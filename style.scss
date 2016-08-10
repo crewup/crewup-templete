@@ -1,0 +1,313 @@
+/****************** Global Variables ***********************/
+$font-family: "Helvetica", "Arial", sans-serif;
+$white: rgba(255, 255, 255, 1);
+$trans-white: rgba(255, 255, 255, 0.6);
+$trans-black: rgba(0, 0, 0, 0.25);
+$theme-blue: rgba(0, 92, 175, 1);
+$background-image: "./img/software.jpg";
+
+/****************** Global Frame ***********************/
+html, body {
+    overflow: inital;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    font-family: $font-family;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+a {
+  padding: 10px 15px;
+  font-weight: 300;
+  text-decoration: none;
+  color: $trans-white;
+  &:hover, &:active {
+    color: $white;
+  }
+}
+
+li {
+  list-style-type: none;
+}
+
+@mixin background-size($size) {
+  -webkit-background-size: $size;
+  -moz-background-size: $size;
+  -o-background-size: $size;
+  background-size: $size;
+}
+
+.background {
+  background: url($background-image) no-repeat center center fixed;
+  @include background-size(cover);
+}
+
+@mixin spacer($value) {
+  -webkit-flex-grow: $value;
+  -ms-flex-positive: $value;
+          flex-grow: $value;
+}
+spacer {
+  @include spacer(1);
+}
+
+button {
+/*The background color and text color should be set by certain somewhere to use*/
+  background: $theme-blue;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  position: relative;
+  margin: 0;
+  display: inline-block;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: 0;
+  overflow: hidden;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  line-height: 36px;
+
+
+  &.rectangle {
+    height: 48px;
+    min-width: 64px;
+  }
+
+  &.round {
+    height: 48px;
+    width: 48px;
+    border-radius: 100%;
+  }
+}
+
+
+/****************** Ripple-effect ***********************/
+
+.ripple{
+  overflow:hidden;
+}
+
+.ripple-effect{
+  position: absolute;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background: $trans-white;
+  animation: ripple-animation 2s;
+}
+
+@keyframes ripple-animation {
+    from {
+      transform: scale(1);
+      opacity: 0.4;
+    }
+    to {
+      transform: scale(100);
+      opacity: 0;
+    }
+}
+
+/****************** Header Components ***********************/
+header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 8%;
+  width: 100%;
+  min-height: 48px;
+  color: white;
+  z-index: 900;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  padding: 0 4% 0 8%;
+  align-items: center;
+  align-self: stretch;
+
+  &.shadow {
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  }
+
+  &.color {
+      background-color: rgba(0, 92, 175, 0.8);
+  }
+
+  > logo {
+    height: 80%;
+    padding: 5px 10px;
+  }
+
+  > .title {
+    display: inline-block;
+    position: relative;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    font-weight: 400;
+    box-sizing: border-box;
+    align-items: center;
+  }
+
+  > a:hover {
+    border-style: solid;
+    border-width: 1px;
+    border-color: white;
+  }
+
+  > a:active {
+    color: rgba(0, 0, 0, 1);
+    background-color: white;
+    mix-blend-mode: exclusion;
+  }
+}
+
+/****************** Main Components ***********************/
+main {
+  margin: 80px auto 10px auto;
+  height: auto;
+  padding: 10px;
+}
+
+
+@mixin direction($dir) {
+  -webkit-flex-direction: $dir;
+      -ms-flex-direction: $dir;
+          flex-direction: $dir;
+}
+$card-width: 800px;
+.card {
+  @include direction(columns);
+  width: $card-width;
+  margin: 0px auto;
+  font-size: 16px;
+  font-weight: 400;
+  background: rgb(255,255,255);
+  border-radius: 2px;
+  box-sizing: border-box;
+  align-items: center;
+
+  & > button.rectangle {
+    background: transparent;
+    color: $theme-blue;
+    padding: 0 16px;
+
+    &:hover, &:active {
+      background-color: $trans-black;
+    }
+  }
+
+
+  & > button.round {
+    background-color: pink;
+    transform: translate($card-width*0.8, -50%);
+  }
+
+  & > .break-line {
+    height: 1px;
+    width: inherit;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  $p-padding: $card-width/10;
+  & > p {
+    line-height: 18px;
+    overflow: hidden;
+    padding: $p-padding/8 $p-padding;
+    margin: auto;
+
+    &.main-text {
+      color: rgba(0,0,0, 0.54);
+      font-size: 1rem;
+    }
+
+    $subtitle-color: $theme-blue;
+    &.subtitle {
+      color: $subtitle-color;
+      display: block;
+      font-size: 24px;
+      font-weight: 300;
+      line-height: normal;
+      overflow: hidden;
+      -webkit-transform-origin: 149px 48px;
+              transform-origin: 149px 48px;
+      margin: 0;
+
+      &:before {
+        display: inline-block;
+        vertical-align: middle;
+        transform: translateX(-$p-padding);
+        content: '';
+        height: 50px;
+        width: 5px;
+        background-color: $subtitle-color;
+      }
+    }
+  }
+
+  & > .card-image {
+    display: flex;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    height: 240px;
+    width: 100%;
+    background: url('./img/container.jpg') center / cover;
+
+    & > h1 {
+      align-self: flex-end;
+      text-shadow: 1px 0px rgba(0,0,0, 0.54);
+      margin: 28px;
+      color: #fff;
+      font-size: 24px;
+      font-weight: 300;
+    }
+  }
+}
+
+.shadow--2dp {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
+
+.shadow--3dp {
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.12); }
+
+.shadow--4dp {
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2); }
+
+.shadow--6dp {
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.2); }
+
+.shadow--8dp {
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2); }
+
+.shadow--16dp {
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2); }
+
+.shadow--24dp {
+  box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2); }
+
+/****************** Footer Components ***********************/
+footer {
+  width: 100%;
+  padding: 32px 16px;
+  background-color: rgba(66, 66, 66, 0.8);
+
+  &.fixed {
+    position:fixed;
+    bottom: 0px;
+  }
+
+  & > ul {
+    display: flex;
+    flex-direction: row;
+  }
+}
